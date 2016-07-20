@@ -1,0 +1,14 @@
+<h2 *ngIf="mockUser"> {{mockUser.lastname}}, {{mockUser.firstname}} </h2>
+<ul> 
+  <li (click)="selectTab(0)">{{tabTitles[0]}} </li>
+  <li (click)="selectTab(1)">{{tabTitles[1]}} </li>
+  <li (click)="selectTab(2)">{{tabTitles[2]}} </li>
+  <li (click)="selectTab(3)">{{tabTitles[3]}} </li>
+</ul>
+
+<active-tasks *ngIf="currentTabIndex==0"></active-tasks>
+<potential-tasks *ngIf="currentTabIndex==1"></potential-tasks>
+<previous-tasks *ngIf="currentTabIndex==2"></previous-tasks>
+<profile *ngIf="currentTabIndex==3" [mockUser]="mockUser"></profile>
+
+

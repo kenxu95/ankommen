@@ -1,0 +1,20 @@
+<h1> Profile </h1>
+<ul>
+  <li>Name: {{mockUser.firstname}} {{mockUser.lastname}} </li>
+  <li>Username: {{mockUser.username}} </li>
+  <li>Password: {{mockUser.password}} </li>
+  <li>Email: {{mockUser.email}} </li>
+  <li>Notification Frequency: {{mockUser.notificationFrequency}} </li>
+  <li>Description: {{mockUser.description}} </li>
+  <li>Assets: 
+    <ul> 
+      <li *ngFor="let asset of mockUser.assets"> {{asset}}</li>
+    </ul>
+  </li>
+  <li>Locations: 
+      <ul> 
+      <li *ngFor="let location of mockUser.locations"> {{location}}</li>
+    </ul>
+  </li>
+  <li>Image: {{mockUser.image}}</li>
+</ul>

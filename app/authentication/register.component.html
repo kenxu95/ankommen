@@ -1,0 +1,79 @@
+<h1>Register Form</h1>
+<form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" required placeholder="pandaPaw" [(ngModel)]="newUser.username" name="username" #usernameCtrl="ngModel">      
+    <div [hidden]="usernameCtrl.valid || usernameCtrl.pristine" class="alert alert-danger">
+      Username is required 
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="text" class="form-control" required minlength="8" [(ngModel)]="newUser.password" name="password"
+    #passwordCtrl="ngModel">
+    <div [hidden]="passwordCtrl.valid" class="alert alert-danger">
+      Password must be at least 8 characters long
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="firstname">First Name</label>
+    <input type="text" class="form-control" required placeholder="Hans" [(ngModel)]="newUser.firstname" name="firstname" #firstnameCtrl="ngModel">      
+    <div [hidden]="firstnameCtrl.valid || firstnameCtrl.pristine" class="alert alert-danger">
+      First Name is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="lastname">Last Name</label>
+    <input type="text" class="form-control" required placeholder="Zimmerman" [(ngModel)]="newUser.lastname" name="lastname" #lastnameCtrl="ngModel">      
+    <div [hidden]="lastnameCtrl.valid || lastnameCtrl.pristine" class="alert alert-danger">
+      Last Name is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" required placeholder="hzimmerman@gmail.com " [(ngModel)]="newUser.email" name="email" #emailCtrl="ngModel">      
+    <div [hidden]="emailCtrl.valid || emailCtrl.pristine" class="alert alert-danger">
+      Email is required
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="notificationFrequency">Notification Frequency </label>
+    <select class="form-control"
+    [(ngModel)]="newUser.notificationFrequency"
+    name="notificationFrequency">
+    <option *ngFor="let freq of notificationFrequencies" [value]="notificationFrequencies.indexOf(freq)">{{freq}}</option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="description">Description</label>
+  <input type="text" class="form-control" placeholder="(optional) Mathematics teacher in Leipzig" [(ngModel)]="newUser.description" name="description"> 
+</div> 
+
+<div> TODO: Assets, Locations, Image </div>
+
+<button type="submit" class="btn btn-default" [disabled]="!registerForm.form.valid">Submit</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
