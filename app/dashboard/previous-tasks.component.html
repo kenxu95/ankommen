@@ -1,0 +1,26 @@
+<h1> My Previous Tasks </h1>
+<ul class="my-previous-tasks">
+  <li *ngFor="let task of myPreviousTasks"> 
+    <ul>
+      <li> ID: {{task.id}}</li> 
+      <li> START TIME: {{task.startTime}}</li>
+      <li> END TIME: {{task.endTime}}</li>
+      <li> DESCRIPTION: {{task.description}} </li>
+      <li> ASSETS: {{task.assets}} </li>
+      </ul>
+  </li>
+</ul>
+
+
+<h1> Previous Participating Tasks</h1>
+<ul class="previous-participating-tasks">
+  <li *ngFor="let task of previousParticipatingTasks"> 
+    <ul>
+      <li> ID: {{task.id}}</li> 
+      <li> START TIME: {{task.startTime}}</li>
+      <li> END TIME: {{task.endTime}}</li>
+      <li> DESCRIPTION: {{task.description}} </li>
+      <li> ASSETS: {{task.assets}} </li>
+      </ul>
+  </li>
+</ul>

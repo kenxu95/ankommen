@@ -9,15 +9,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var index_1 = require('../shared/index');
 var PreviousTasksComponent = (function () {
-    function PreviousTasksComponent() {
+    function PreviousTasksComponent(taskService) {
+        this.taskService = taskService;
     }
+    PreviousTasksComponent.prototype.getSelectedTasks = function () {
+        var _this = this;
+        this.taskService
+            .getSelectedTasksPrevious(this.mockUser.myTasks)
+            .then(function (tasks) { return _this.myPreviousTasks = tasks; })
+            .catch(function (error) { return _this.error = error; });
+        this.taskService
+            .getSelectedTasksPrevious(this.mockUser.participatingTasks)
+            .then(function (tasks) { return _this.previousParticipatingTasks = tasks; })
+            .catch(function (error) { return _this.error = error; });
+    };
+    PreviousTasksComponent.prototype.ngOnChanges = function () {
+        if (this.mockUser)
+            this.getSelectedTasks();
+    };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PreviousTasksComponent.prototype, "mockUser", void 0);
     PreviousTasksComponent = __decorate([
         core_1.Component({
             selector: 'previous-tasks',
-            template: "<h1>PREVIOUS TASKS </h1>"
+            templateUrl: 'app/dashboard/previous-tasks.component.html',
+            providers: [index_1.TaskService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [index_1.TaskService])
     ], PreviousTasksComponent);
     return PreviousTasksComponent;
 }());

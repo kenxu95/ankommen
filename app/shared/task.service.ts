@@ -5,15 +5,55 @@ import { Task } from './index';
 
 @Injectable()
 export class TaskService {
-  private dashboardUrl = 'app/dashboard'
+  private dashboardUrl = 'app/tasks';
 
   constructor(private http: Http){}
 
-  getTasks(): Promise<Task[]>{
-    return this.http.get(this.dashboardUrl)
+  // TODO: RANK BY RELEVANCEJ
+  getPotentialTasks(assets: Array<string>, accountedTasks: Array<number>): Promise<Task[]>{
+    return this.http.get(this.dashboardUrl) 
            .toPromise()
-           .then(response => response.json().data as Task[])
-           .catch(this.handleError);
+           .then(response => (response.json().data as Task[])
+                             .filter(t => {
+                               if (accountedTasks.indexOf(t.id) < 0 &&
+                                   new Date(t.endTime) > new Date()){
+                                 for (var asset of assets){
+                                   if (t.assets.indexOf(asset) >= 0)
+                                     return true;
+                                 }          
+                               }
+                               return false; 
+                             }))
+          .catch(this.handleError); 
+  }
+
+  getSelectedTasks(selectedTasks: Array<number>): Promise<Task[]>{
+    return this.http.get(this.dashboardUrl) 
+           .toPromise()
+           .then(response => (response.json().data as Task[])
+                             .filter(t => {
+                             return (selectedTasks.indexOf(t.id) >= 0);})) 
+           .catch(this.handleError); 
+  }
+
+  getSelectedTasksPrevious(selectedTasks: Array<number>): Promise<Task[]>{
+    return this.http.get(this.dashboardUrl) 
+           .toPromise()
+           .then(response => (response.json().data as Task[])
+                             .filter(t => {
+                               return (selectedTasks.indexOf(t.id) >= 0) 
+                               && (new Date(t.endTime) < new Date());}))
+           .catch(this.handleError); 
+  }
+
+  getSelectedTasksFuture(selectedTasks: Array<number>): Promise<Task[]>{
+    return this.http.get(this.dashboardUrl) 
+       .toPromise()
+       .then(response => (response.json().data as Task[])
+                         .filter(t => {
+                           return (selectedTasks.indexOf(t.id) >= 0) 
+                           && (new Date(t.endTime) > new Date());}))
+       .catch(this.handleError); 
   }
 
   private handleError(error: any){

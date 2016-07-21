@@ -1,7 +1,7 @@
 // Imports for loading & configuring the in-memory web api
 import { XHRBackend } from '@angular/http';
 import { InMemoryBackendService, SEED_DATA } from 'angular2-in-memory-web-api';
-import { InMemoryDataService } from './shared/in-memory-data.service';
+import { MockTasksDatabase } from './shared/index';
 
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
@@ -16,6 +16,6 @@ bootstrap(AppComponent, [
   disableDeprecatedForms(),
   provideForms(),
   { provide: XHRBackend, useClass: InMemoryBackendService }, // in-mem server
-  { provide: SEED_DATA, useClass: InMemoryDataService } // in-mem server data
+  { provide: SEED_DATA, useClass: MockTasksDatabase } // in-mem server data
   ])
   .catch((err: any) => console.error(err));

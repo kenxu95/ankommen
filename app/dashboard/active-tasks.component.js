@@ -14,20 +14,31 @@ var ActiveTasksComponent = (function () {
     function ActiveTasksComponent(taskService) {
         this.taskService = taskService;
     }
-    ActiveTasksComponent.prototype.getTasks = function () {
+    // FILTER BY ACTIVE TASKS TODO: ADD MY TASKS TOO
+    ActiveTasksComponent.prototype.getSelectedTasks = function () {
         var _this = this;
         this.taskService
-            .getTasks()
-            .then(function (tasks) { return _this.tasks = tasks; })
+            .getSelectedTasksFuture(this.mockUser.myTasks)
+            .then(function (tasks) { return _this.myTasks = tasks; })
+            .catch(function (error) { return _this.error = error; });
+        this.taskService
+            .getSelectedTasksFuture(this.mockUser.participatingTasks)
+            .then(function (tasks) { return _this.participatingTasks = tasks; })
             .catch(function (error) { return _this.error = error; });
     };
-    ActiveTasksComponent.prototype.ngOnInit = function () {
-        this.getTasks();
+    ActiveTasksComponent.prototype.ngOnChanges = function () {
+        if (this.mockUser)
+            this.getSelectedTasks();
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], ActiveTasksComponent.prototype, "mockUser", void 0);
     ActiveTasksComponent = __decorate([
         core_1.Component({
             selector: 'active-tasks',
-            template: "<h1>ACTIVE TASKS </h1>"
+            templateUrl: "app/dashboard/active-tasks.component.html",
+            providers: [index_1.TaskService]
         }), 
         __metadata('design:paramtypes', [index_1.TaskService])
     ], ActiveTasksComponent);

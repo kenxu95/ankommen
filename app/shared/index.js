@@ -6,4 +6,5 @@ __export(require('./user'));
 __export(require('./user.service'));
 __export(require('./task'));
 __export(require('./task.service'));
+__export(require('./mockTasksDatabase'));
 //# sourceMappingURL=index.js.map

@@ -1,8 +1,8 @@
 "use strict";
-var InMemoryDataService = (function () {
-    function InMemoryDataService() {
+var MockTasksDatabase = (function () {
+    function MockTasksDatabase() {
     }
-    InMemoryDataService.prototype.createDb = function () {
+    MockTasksDatabase.prototype.createDb = function () {
         var tasks = [
             {
                 id: 1,
@@ -75,10 +75,11 @@ var InMemoryDataService = (function () {
                 assets: ["listening", "enthusiasm"]
             }
         ];
+        return { tasks: tasks };
     };
-    return InMemoryDataService;
+    return MockTasksDatabase;
 }());
-exports.InMemoryDataService = InMemoryDataService;
+exports.MockTasksDatabase = MockTasksDatabase;
 // export class InMemoryDataService {
 //   createDb() {
 //     let heroes = [

@@ -1,0 +1,31 @@
+<h1> Specifically Requesting You </h1>
+<ul class="specifically-requesting-tasks">
+  <li *ngFor="let task of specificallyRequestedTasks"> 
+    <ul>
+      <li> ID: {{task.id}}</li> 
+      <li> START TIME: {{task.startTime}}</li>
+      <li> END TIME: {{task.endTime}}</li>
+      <li> DESCRIPTION: {{task.description}} </li>
+      <li> ASSETS: {{task.assets}} </li>
+      </ul>
+  </li>
+</ul>
+
+
+<h1> Potential Tasks </h1> 
+<div>
+  <label>assets: </label>
+  <input [(ngModel)]="assetsSearch" />
+  <button (click)="searchForTasks()"> Search</button>
+</div>
+<ul class="potential-tasks">
+  <li *ngFor="let task of potentialTasks"> 
+    <ul>
+      <li> ID: {{task.id}}</li> 
+      <li> START TIME: {{task.startTime}}</li>
+      <li> END TIME: {{task.endTime}}</li>
+      <li> DESCRIPTION: {{task.description}} </li>
+      <li> ASSETS: {{task.assets}} </li>
+      </ul>
+  </li>
+</ul>

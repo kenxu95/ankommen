@@ -1,28 +1,39 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnChanges, Input } from '@angular/core'
 import { Task, TaskService } from '../shared/index'
 
 @Component({
   selector: 'active-tasks',
-  template: "<h1>ACTIVE TASKS </h1>"
+  templateUrl: "app/dashboard/active-tasks.component.html",
+  providers: [TaskService]
 })
 
-export class ActiveTasksComponent implements OnInit {
-  tasks: Task[];
+export class ActiveTasksComponent implements OnChanges {
+  @Input()
+  mockUser: any;
+
+  myTasks: Task[];
+  participatingTasks: Task[];
   error: any;
 
   constructor(
     private taskService: TaskService
     ){}
 
-  getTasks() {
+  // FILTER BY ACTIVE TASKS TODO: ADD MY TASKS TOO
+  private getSelectedTasks() {
     this.taskService
-        .getTasks()
-        .then(tasks => this.tasks = tasks)
+        .getSelectedTasksFuture(this.mockUser.myTasks)
+        .then(tasks => this.myTasks = tasks)
+        .catch(error => this.error = error);
+
+    this.taskService
+        .getSelectedTasksFuture(this.mockUser.participatingTasks)
+        .then(tasks => this.participatingTasks = tasks)
         .catch(error => this.error = error);
   }
 
-  ngOnInit() {
-    this.getTasks();
+  ngOnChanges() {
+    if (this.mockUser)
+      this.getSelectedTasks();
   }
-
 }

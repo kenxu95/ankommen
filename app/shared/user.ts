@@ -5,9 +5,9 @@ export class User {
   lastname: string;
   email: string;
 
-  myTasks?: any;
-  participatingTasks?: any;
-  specificallyRequest? : any;
+  myTasks: any;
+  participatingTasks: any;
+  specificallyRequest : any;
 
   constructor (
     public notificationFrequency: number = 0,

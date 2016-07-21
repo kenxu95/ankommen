@@ -6,9 +6,8 @@
   <li (click)="selectTab(3)">{{tabTitles[3]}} </li>
 </ul>
 
-<active-tasks *ngIf="currentTabIndex==0"></active-tasks>
-<potential-tasks *ngIf="currentTabIndex==1"></potential-tasks>
-<previous-tasks *ngIf="currentTabIndex==2"></previous-tasks>
+<active-tasks *ngIf="currentTabIndex==0" [mockUser]="mockUser"></active-tasks>
+<potential-tasks *ngIf="currentTabIndex==1" [mockUser]="mockUser"></potential-tasks>
+<previous-tasks *ngIf="currentTabIndex==2" [mockUser]="mockUser"></previous-tasks>
 <profile *ngIf="currentTabIndex==3" [mockUser]="mockUser"></profile>
-
 
