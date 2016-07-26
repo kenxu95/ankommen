@@ -9,17 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
 var HomeComponent = (function () {
     function HomeComponent() {
+        // DATE PICKER 
+        this.dt = new Date();
+        this.minDate = new Date();
+        // TIME PICKER 
+        this.hstep = 1;
+        this.mstep = 15;
+        this.ismeridian = false;
     }
+    HomeComponent.prototype.getDate = function () {
+        return this.dt && this.dt.getTime() || new Date().getTime();
+    };
     HomeComponent = __decorate([
         core_1.Component({
             selector: 'home-page',
-            template: '<h1> Ankommen Home Page </h1>'
+            templateUrl: 'app/home.component.html',
+            directives: [ng2_bootstrap_1.DATEPICKER_DIRECTIVES, ng2_bootstrap_1.TimepickerComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], HomeComponent);
     return HomeComponent;
 }());
 exports.HomeComponent = HomeComponent;
+new Date();
 //# sourceMappingURL=home.component.js.map

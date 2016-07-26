@@ -24,3 +24,18 @@
       </ul>
   </li>
 </ul>
+
+<div class='wrapper'>
+  <div class="container" [dragula]='"assets-bag"'> 
+    <div *ngFor="let assetNumber of myAssets">
+<!--       Embed img tag in <a> tag-->    
+  <img src="https://blognumbers.files.wordpress.com/2010/09/{{assetNumber}}.jpg" alt="{{assetNumber}}" height="60" width="50" (click)=imageClick()>
+    </div>
+  </div>
+
+  <div class="container" [dragula]='"assets-bag"'> 
+    <div *ngFor="let assetNumber of otherAssets">
+      <img src="https://blognumbers.files.wordpress.com/2010/09/{{assetNumber}}.jpg" alt="{{assetNumber}}" height="60" width="50" (click)=imageClick()>
+    </div>
+  </div>
+</div>

@@ -17,6 +17,7 @@ export class PotentialTasksComponent implements OnChanges {
   potentialTasks: Task[];
   error: any;
 
+
   constructor(
     private taskService: TaskService
     ){}

@@ -15,8 +15,9 @@ export class TaskService {
            .toPromise()
            .then(response => (response.json().data as Task[])
                              .filter(t => {
-                               if (accountedTasks.indexOf(t.id) < 0 &&
-                                   new Date(t.endTime) > new Date()){
+                               if (accountedTasks.indexOf(t.id) < 0){
+                               // if (accountedTasks.indexOf(t.id) < 0 &&
+                               //     new Date(t.endTime) > new Date()){
                                  for (var asset of assets){
                                    if (t.assets.indexOf(asset) >= 0)
                                      return true;
@@ -41,8 +42,10 @@ export class TaskService {
            .toPromise()
            .then(response => (response.json().data as Task[])
                              .filter(t => {
-                               return (selectedTasks.indexOf(t.id) >= 0) 
-                               && (new Date(t.endTime) < new Date());}))
+                               return selectedTasks.indexOf(t.id) >= 0;
+                               // return (selectedTasks.indexOf(t.id) >= 0) 
+                               // && (new Date(t.endTime) < new Date());
+                             }))
            .catch(this.handleError); 
   }
 
@@ -51,8 +54,10 @@ export class TaskService {
        .toPromise()
        .then(response => (response.json().data as Task[])
                          .filter(t => {
-                           return (selectedTasks.indexOf(t.id) >= 0) 
-                           && (new Date(t.endTime) > new Date());}))
+                           return selectedTasks.indexOf(t.id) >= 0;
+                           // return (selectedTasks.indexOf(t.id) >= 0) 
+                           // && (new Date(t.endTime) > new Date());
+                         }))
        .catch(this.handleError); 
   }
 

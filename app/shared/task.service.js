@@ -22,8 +22,9 @@ var TaskService = (function () {
             .toPromise()
             .then(function (response) { return response.json().data
             .filter(function (t) {
-            if (accountedTasks.indexOf(t.id) < 0 &&
-                new Date(t.endTime) > new Date()) {
+            if (accountedTasks.indexOf(t.id) < 0) {
+                // if (accountedTasks.indexOf(t.id) < 0 &&
+                //     new Date(t.endTime) > new Date()){
                 for (var _i = 0, assets_1 = assets; _i < assets_1.length; _i++) {
                     var asset = assets_1[_i];
                     if (t.assets.indexOf(asset) >= 0)
@@ -48,8 +49,9 @@ var TaskService = (function () {
             .toPromise()
             .then(function (response) { return response.json().data
             .filter(function (t) {
-            return (selectedTasks.indexOf(t.id) >= 0)
-                && (new Date(t.endTime) < new Date());
+            return selectedTasks.indexOf(t.id) >= 0;
+            // return (selectedTasks.indexOf(t.id) >= 0) 
+            // && (new Date(t.endTime) < new Date());
         }); })
             .catch(this.handleError);
     };
@@ -58,8 +60,9 @@ var TaskService = (function () {
             .toPromise()
             .then(function (response) { return response.json().data
             .filter(function (t) {
-            return (selectedTasks.indexOf(t.id) >= 0)
-                && (new Date(t.endTime) > new Date());
+            return selectedTasks.indexOf(t.id) >= 0;
+            // return (selectedTasks.indexOf(t.id) >= 0) 
+            // && (new Date(t.endTime) > new Date());
         }); })
             .catch(this.handleError);
     };
