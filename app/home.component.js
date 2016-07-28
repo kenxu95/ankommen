@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
+var core_2 = require('angular2-google-maps/core');
 var HomeComponent = (function () {
     function HomeComponent() {
         // DATE PICKER 
@@ -19,6 +20,10 @@ var HomeComponent = (function () {
         this.hstep = 1;
         this.mstep = 15;
         this.ismeridian = false;
+        this.selectedTime = new Date();
+        //GOOGLE MAPS
+        this.lat = 51.678418;
+        this.lng = 7.809007;
     }
     HomeComponent.prototype.getDate = function () {
         return this.dt && this.dt.getTime() || new Date().getTime();
@@ -27,12 +32,12 @@ var HomeComponent = (function () {
         core_1.Component({
             selector: 'home-page',
             templateUrl: 'app/home.component.html',
-            directives: [ng2_bootstrap_1.DATEPICKER_DIRECTIVES, ng2_bootstrap_1.TimepickerComponent]
+            styles: ["\n          .sebm-google-map-container {\n            height: 300px;\n          }\n          "],
+            directives: [ng2_bootstrap_1.DATEPICKER_DIRECTIVES, ng2_bootstrap_1.TimepickerComponent, core_2.GOOGLE_MAPS_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])
     ], HomeComponent);
     return HomeComponent;
 }());
 exports.HomeComponent = HomeComponent;
-new Date();
 //# sourceMappingURL=home.component.js.map

@@ -1,0 +1,54 @@
+ .wrapper {
+  display: table;
+}
+.container {
+  display: table-cell;
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 50%;
+}
+.container:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.container div,
+.gu-mirror {
+  margin: 10px;
+  padding: 10px;
+  background-color: #0000FF;
+  transition: opacity 0.4s ease-in-out;
+}
+.container div {
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+
+.gu-mirror {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+
+.asset-image {
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  margin: 5em;
+}
+
+.asset-image:hover .asset-image-hover-menu {
+  display: block;
+  position: absolute;
+}
+
+.asset-image-hover-menu {
+  display: none;
+}
+
+img{
+  width: 100%;
+  height: 100%;
+}
+

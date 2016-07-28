@@ -1,0 +1,16 @@
+<h3> Availability </h3>
+
+<div class="day of the week"
+*ngFor="let dayIndex of [0, 1, 2, 3, 4, 5, 6]"> 
+<div *ngIf="asset.availability[dayIndex].length>0">
+  {{weekdays[dayIndex]}}
+</div>
+
+<div class="wrapper">
+  <div class="container" [dragula]='"timerange-bag"'>
+    <div *ngFor="let timeRanges of asset.availability[dayIndex]"> 
+      {{dateService.getTime(timeRanges.start)}} to {{dateService.getTime(timeRanges.end)}} 
+    </div>
+  </div>
+</div>
+</div>

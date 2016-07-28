@@ -6,15 +6,19 @@
   <li>Email: {{mockUser.email}} </li>
   <li>Notification Frequency: {{mockUser.notificationFrequency}} </li>
   <li>Description: {{mockUser.description}} </li>
-  <li>Assets: 
-    <ul> 
-      <li *ngFor="let asset of mockUser.assets"> {{asset}}</li>
-    </ul>
-  </li>
-  <li>Locations: 
-      <ul> 
-      <li *ngFor="let location of mockUser.locations"> {{location}}</li>
-    </ul>
-  </li>
   <li>Image: {{mockUser.image}}</li>
 </ul>
+
+<h2> My Assets </h2>
+<div class="wrapper">
+  <div class="container" [dragula]='"assets-bag"'> 
+    <div class="asset-image" *ngFor="let myAsset of myAssets">
+      <img src="https://blognumbers.files.wordpress.com/2010/09/{{myAsset.name}}.jpg" alt="{{myAsset.name}}" (click)='imageClick(myAsset, $event)'>
+
+      <week-time-shower class="asset-image-hover-menu" [asset]="myAsset"></week-time-shower>
+    </div>
+  </div>
+</div>
+
+<week-time-shower *ngIf="selectedAsset" [asset]="selectedAsset"></week-time-shower>
+<week-time-picker *ngIf="selectedAsset" [asset]="selectedAsset"></week-time-picker>

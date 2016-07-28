@@ -8,9 +8,11 @@ var forms_1 = require('@angular/forms');
 var http_2 = require('@angular/http');
 var app_component_1 = require('./app.component');
 var app_routes_1 = require('./app.routes');
+var core_1 = require('angular2-google-maps/core');
 platform_browser_dynamic_1.bootstrap(app_component_1.AppComponent, [
     app_routes_1.appRouterProviders,
     http_2.HTTP_PROVIDERS,
+    core_1.GOOGLE_MAPS_PROVIDERS,
     forms_1.disableDeprecatedForms(),
     forms_1.provideForms(),
     { provide: http_1.XHRBackend, useClass: angular2_in_memory_web_api_1.InMemoryBackendService },

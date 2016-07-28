@@ -7,3 +7,8 @@
 <timepicker [(ngModel)]="selectedTime" [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian"></timepicker>
 
 <pre class="alert alert-info">Time is: {{selectedTime}}</pre>
+
+
+<sebm-google-map [latitude]="lat" [longitude]="lng">
+  <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+</sebm-google-map>

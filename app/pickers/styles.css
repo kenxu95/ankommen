@@ -1,0 +1,26 @@
+ .wrapper {
+  display: table;
+}
+.container {
+  display: table-cell;
+  width: 50%;
+}
+
+.container div,
+.gu-mirror {
+  margin: 1px;
+  padding: 1px;
+}
+.container div {
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+
+.gu-mirror {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}

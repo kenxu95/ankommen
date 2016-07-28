@@ -7,4 +7,6 @@ __export(require('./user.service'));
 __export(require('./task'));
 __export(require('./task.service'));
 __export(require('./mockTasksDatabase'));
+__export(require('./asset'));
+__export(require('./date.service'));
 //# sourceMappingURL=index.js.map

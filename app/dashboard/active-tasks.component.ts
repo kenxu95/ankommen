@@ -1,13 +1,9 @@
 import { Component, OnChanges, Input } from '@angular/core';
 import { Task, TaskService } from '../shared/index';
-import { Dragula, DragulaService} from 'ng2-dragula/ng2-dragula';
 
 @Component({
   selector: 'active-tasks',
   templateUrl: "app/dashboard/active-tasks.component.html",
-  styleUrls: ["app/shared/styles/dragAssets.css"],
-  directives: [Dragula],
-  viewProviders: [DragulaService],
   providers: [TaskService]
 })
 
@@ -19,18 +15,7 @@ export class ActiveTasksComponent implements OnChanges {
   participatingTasks: Task[];
   error: any;
 
-  // TODO: Replace this with real assets code when we can fetch asset images
-  myAssets: number[] = [1, 2, 3, 4];
-  otherAssets: number[] = [5, 6, 7];
-
-  constructor(
-    private taskService: TaskService,
-    private dragulaService: DragulaService
-    ){
-    dragulaService.setOptions('assets-bag', {
-      revertOnSpill: true
-    });
-  }
+  constructor(private taskService: TaskService){}
 
   // FILTER BY ACTIVE TASKS TODO: ADD MY TASKS TOO
   private getSelectedTasks() {
@@ -48,16 +33,8 @@ export class ActiveTasksComponent implements OnChanges {
   ngOnChanges() {
     if (this.mockUser)
       this.getSelectedTasks();
-
-    if (typeof jQuery != 'undefined') {
-      alert(jQuery.fn.jquery);
-    }
   }
 
-  imageClick(){
-    console.log("Image clicked");
-    console.log(this.myAssets);
-  }
 }
 
 

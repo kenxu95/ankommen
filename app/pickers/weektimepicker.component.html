@@ -1,0 +1,9 @@
+<h3>Add a New Time Range </h3>
+<timepicker [(ngModel)]="startTime" [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian"></timepicker>
+
+<pre class="alert alert-info">Start Time: {{dateService.getTime(startTime)}}</pre>
+
+
+<timepicker [(ngModel)]="endTime" [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian">End Time:</timepicker>
+
+<pre class="alert alert-info">End Time: {{dateService.getTime(endTime)}}</pre>

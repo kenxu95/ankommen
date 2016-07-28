@@ -8,5 +8,4 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 })
 
 // TODO: Add an authentication flag to update the top menu
-export class AppComponent { 
-}
+export class AppComponent { }

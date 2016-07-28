@@ -10,17 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var index_1 = require('../shared/index');
-var ng2_dragula_1 = require('ng2-dragula/ng2-dragula');
 var ActiveTasksComponent = (function () {
-    function ActiveTasksComponent(taskService, dragulaService) {
+    function ActiveTasksComponent(taskService) {
         this.taskService = taskService;
-        this.dragulaService = dragulaService;
-        // TODO: Replace this with real assets code when we can fetch asset images
-        this.myAssets = [1, 2, 3, 4];
-        this.otherAssets = [5, 6, 7];
-        dragulaService.setOptions('assets-bag', {
-            revertOnSpill: true
-        });
     }
     // FILTER BY ACTIVE TASKS TODO: ADD MY TASKS TOO
     ActiveTasksComponent.prototype.getSelectedTasks = function () {
@@ -37,13 +29,6 @@ var ActiveTasksComponent = (function () {
     ActiveTasksComponent.prototype.ngOnChanges = function () {
         if (this.mockUser)
             this.getSelectedTasks();
-        if (typeof jQuery != 'undefined') {
-            alert(jQuery.fn.jquery);
-        }
-    };
-    ActiveTasksComponent.prototype.imageClick = function () {
-        console.log("Image clicked");
-        console.log(this.myAssets);
     };
     __decorate([
         core_1.Input(), 
@@ -53,12 +38,9 @@ var ActiveTasksComponent = (function () {
         core_1.Component({
             selector: 'active-tasks',
             templateUrl: "app/dashboard/active-tasks.component.html",
-            styleUrls: ["app/shared/styles/dragAssets.css"],
-            directives: [ng2_dragula_1.Dragula],
-            viewProviders: [ng2_dragula_1.DragulaService],
             providers: [index_1.TaskService]
         }), 
-        __metadata('design:paramtypes', [index_1.TaskService, ng2_dragula_1.DragulaService])
+        __metadata('design:paramtypes', [index_1.TaskService])
     ], ActiveTasksComponent);
     return ActiveTasksComponent;
 }());
