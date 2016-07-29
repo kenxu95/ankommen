@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var ng2_dragula_1 = require('ng2-dragula/ng2-dragula');
 var index_1 = require('../pickers/index');
+var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
 var index_2 = require('../shared/index');
 var ProfileComponent = (function () {
     function ProfileComponent(dragulaService) {
@@ -62,8 +63,9 @@ var ProfileComponent = (function () {
             selector: 'profile',
             templateUrl: "app/dashboard/profile.component.html",
             styleUrls: ["app/dashboard/styles.css"],
-            directives: [ng2_dragula_1.Dragula, index_1.WeektimeshowerComponent, index_1.WeektimepickerComponent],
-            viewProviders: [ng2_dragula_1.DragulaService]
+            directives: [ng2_dragula_1.Dragula, index_1.WeektimeshowerComponent, index_1.WeektimepickerComponent,
+                ng2_bootstrap_1.MODAL_DIRECTIVES],
+            viewProviders: [ng2_dragula_1.DragulaService, ng2_bootstrap_1.BS_VIEW_PROVIDERS]
         }), 
         __metadata('design:paramtypes', [ng2_dragula_1.DragulaService])
     ], ProfileComponent);

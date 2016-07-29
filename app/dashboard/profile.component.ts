@@ -1,15 +1,18 @@
 import { Component, Input } from '@angular/core'
 import { Dragula, DragulaService} from 'ng2-dragula/ng2-dragula';
 import { WeektimeshowerComponent, WeektimepickerComponent } from '../pickers/index';
+import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { Asset } from '../shared/index'; 
+
  
 @Component({
   selector: 'profile',
   templateUrl: "app/dashboard/profile.component.html",
   styleUrls: ["app/dashboard/styles.css"],
-  directives: [Dragula, WeektimeshowerComponent, WeektimepickerComponent],
-  viewProviders: [DragulaService]
+  directives: [Dragula, WeektimeshowerComponent, WeektimepickerComponent,
+              MODAL_DIRECTIVES],
+  viewProviders: [DragulaService, BS_VIEW_PROVIDERS]
 })
 
 export class ProfileComponent {

@@ -1,0 +1,21 @@
+  <h3>Add Time Range </h3>
+
+  <div id="timepicker">
+    <timepicker [(ngModel)]="startTime" [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian"></timepicker>
+
+    <pre class="alert alert-info">Start Time: {{dateService.getTime(startTime)}}</pre>
+
+    <timepicker [(ngModel)]="endTime" [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian">End Time:</timepicker>
+
+    <pre class="alert alert-info">End Time: {{dateService.getTime(endTime)}}</pre>
+  </div>
+
+  <div id="weekdaypicker">
+    <ul class="weekday-selection">
+      <li *ngFor="let weekIndex of [0, 1, 2, 3, 4, 5, 6]" (click)=onSelect(weekIndex) 
+      [class.selected]="selectedWeekdays[weekIndex]">
+      {{weekdays[weekIndex]}}
+    </li>
+  </ul>
+
+  <button (click)=applyTimeRange() [disabled]="canApplyTimeRange()"> Apply Time Range</button>

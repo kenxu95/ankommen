@@ -26,8 +26,8 @@ var WeektimeshowerComponent = (function () {
     WeektimeshowerComponent = __decorate([
         core_1.Component({
             selector: 'week-time-shower',
-            templateUrl: 'app/pickers/weektimeshower.component.html',
-            styleUrls: ['app/pickers/weektimeshower.css'],
+            templateUrl: 'app/pickers/week-time-shower.component.html',
+            styleUrls: ['app/pickers/week-time-shower.css'],
             directives: [ng2_dragula_1.Dragula],
             viewProviders: [ng2_dragula_1.DragulaService],
             providers: [index_1.DateService]
@@ -37,4 +37,4 @@ var WeektimeshowerComponent = (function () {
     return WeektimeshowerComponent;
 }());
 exports.WeektimeshowerComponent = WeektimeshowerComponent;
-//# sourceMappingURL=weektimeshower.component.js.map
+//# sourceMappingURL=week-time-shower.component.js.map

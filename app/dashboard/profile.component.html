@@ -1,5 +1,5 @@
 <h1> Profile </h1>
-<ul>
+<ul *ngIf="mockUser">
   <li>Name: {{mockUser.firstname}} {{mockUser.lastname}} </li>
   <li>Username: {{mockUser.username}} </li>
   <li>Password: {{mockUser.password}} </li>
@@ -13,12 +13,51 @@
 <div class="wrapper">
   <div class="container" [dragula]='"assets-bag"'> 
     <div class="asset-image" *ngFor="let myAsset of myAssets">
-      <img src="https://blognumbers.files.wordpress.com/2010/09/{{myAsset.name}}.jpg" alt="{{myAsset.name}}" (click)='imageClick(myAsset, $event)'>
+      <img src="https://blognumbers.files.wordpress.com/2010/09/{{myAsset.name}}.jpg" alt="{{myAsset.name}}" (click)="imageClick(myAsset, $event); lgEditAssetModal.show()">
 
       <week-time-shower class="asset-image-hover-menu" [asset]="myAsset"></week-time-shower>
     </div>
   </div>
 </div>
+<button class="btn btn-primary" (click)="lgNewAssetsModal.show()">Add New Assets</button>
 
-<week-time-shower *ngIf="selectedAsset" [asset]="selectedAsset"></week-time-shower>
-<week-time-picker *ngIf="selectedAsset" [asset]="selectedAsset"></week-time-picker>
+
+<!-- Popup when an asset is clicked -->
+<div bsModal #lgEditAssetModal="bs-modal" class="modal fade" tabindex="-1" 
+role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div *ngIf="selectedAsset" class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="lgEditAssetModal.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title">{{selectedAsset.name}}</h4>
+    </div>
+    <div class="modal-body">
+      <div id="timeeditor">
+        <week-time-shower *ngIf="selectedAsset" [asset]="selectedAsset"></week-time-shower>
+        <week-time-picker *ngIf="selectedAsset" [asset]="selectedAsset"></week-time-picker>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div bsModal #lgNewAssetsModal="bs-modal" class="modal fade" tabindex="-1" 
+role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" (click)="lgNewAssetsModal.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title">Hello</h4>
+    </div>
+    <div class="modal-body">
+      <div id="timeeditor">
+      My Name is BLARGP
+      </div>
+    </div>
+  </div>
+</div>
+</div>

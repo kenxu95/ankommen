@@ -2,22 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { ActiveTasksComponent,
          PotentialTasksComponent,
          PreviousTasksComponent,
-         ProfileComponent} from './index'
+         ProfileComponent} from './index';
 
-import { UserService } from '../shared/index'
+import { UserService } from '../shared/index';
+
+  // TODO: Do not want all tabs loading at the same time, right?
+import { TAB_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 
 
 @Component({
   selector: 'dashboard',
   templateUrl: 'app/dashboard/dashboard.component.html',
   directives: [ActiveTasksComponent, PotentialTasksComponent, 
-             PreviousTasksComponent, ProfileComponent],
+             PreviousTasksComponent, ProfileComponent, TAB_DIRECTIVES],
   providers: [UserService]
 })
 
+
 export class DashboardComponent implements OnInit {
-  private tabTitles = ["Active Tasks", "Potential Tasks", "Previous Tasks", "Profile"];
-  currentTabIndex = 0;
 
   mockUser: any; // TODO: REMOVE AFTER BACKEND
 
@@ -31,7 +33,4 @@ export class DashboardComponent implements OnInit {
     this.getMockUser();
   }
 
-  selectTab(tabIndex: number){
-    this.currentTabIndex = tabIndex;
-  }
 }

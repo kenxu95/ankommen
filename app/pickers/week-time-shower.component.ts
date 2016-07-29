@@ -5,8 +5,8 @@ import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula';
 
 @Component ({
   selector: 'week-time-shower',
-  templateUrl: 'app/pickers/weektimeshower.component.html',
-  styleUrls: ['app/pickers/styles.css'],
+  templateUrl: 'app/pickers/week-time-shower.component.html',
+  styleUrls: ['app/pickers/week-time-shower.css'],
   directives: [Dragula],
   viewProviders: [DragulaService],
   providers: [DateService]

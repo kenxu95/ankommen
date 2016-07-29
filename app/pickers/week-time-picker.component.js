@@ -47,8 +47,8 @@ var WeektimepickerComponent = (function () {
     WeektimepickerComponent = __decorate([
         core_1.Component({
             selector: 'week-time-picker',
-            templateUrl: 'app/pickers/weektimepicker.component.html',
-            styleUrls: ['app/pickers/weektimepicker.css'],
+            templateUrl: 'app/pickers/week-time-picker.component.html',
+            styleUrls: ['app/pickers/week-time-picker.css'],
             directives: [ng2_bootstrap_1.TimepickerComponent, core_1.forwardRef(function () { return index_1.WeektimeshowerComponent; })],
             providers: [index_2.DateService]
         }), 
@@ -57,4 +57,4 @@ var WeektimepickerComponent = (function () {
     return WeektimepickerComponent;
 }());
 exports.WeektimepickerComponent = WeektimepickerComponent;
-//# sourceMappingURL=weektimepicker.component.js.map
+//# sourceMappingURL=week-time-picker.component.js.map

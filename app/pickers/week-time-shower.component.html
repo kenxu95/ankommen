@@ -8,8 +8,8 @@
 
 <div class="wrapper">
   <div class="container" [dragula]='"timerange-bag"'>
-    <div *ngFor="let timeRanges of asset.availability[dayIndex]"> 
-      {{dateService.getTime(timeRanges.start)}} to {{dateService.getTime(timeRanges.end)}} 
+    <div *ngFor="let timeRange of asset.availability[dayIndex]"> 
+      {{dateService.getTime(timeRange.start)}} to {{dateService.getTime(timeRange.end)}} 
     </div>
   </div>
 </div>

@@ -11,11 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var index_1 = require('./index');
 var index_2 = require('../shared/index');
+// TODO: Do not want all tabs loading at the same time, right?
+var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
 var DashboardComponent = (function () {
     function DashboardComponent(userService) {
         this.userService = userService;
-        this.tabTitles = ["Active Tasks", "Potential Tasks", "Previous Tasks", "Profile"];
-        this.currentTabIndex = 0;
     }
     DashboardComponent.prototype.getMockUser = function () {
         var _this = this;
@@ -24,15 +24,12 @@ var DashboardComponent = (function () {
     DashboardComponent.prototype.ngOnInit = function () {
         this.getMockUser();
     };
-    DashboardComponent.prototype.selectTab = function (tabIndex) {
-        this.currentTabIndex = tabIndex;
-    };
     DashboardComponent = __decorate([
         core_1.Component({
             selector: 'dashboard',
             templateUrl: 'app/dashboard/dashboard.component.html',
             directives: [index_1.ActiveTasksComponent, index_1.PotentialTasksComponent,
-                index_1.PreviousTasksComponent, index_1.ProfileComponent],
+                index_1.PreviousTasksComponent, index_1.ProfileComponent, ng2_bootstrap_1.TAB_DIRECTIVES],
             providers: [index_2.UserService]
         }), 
         __metadata('design:paramtypes', [index_2.UserService])

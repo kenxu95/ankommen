@@ -2,6 +2,7 @@
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-__export(require('./weektimepicker.component'));
-__export(require('./weektimeshower.component'));
+__export(require('./week-time-picker.component'));
+__export(require('./week-time-shower.component'));
+__export(require('./new-assets-picker.component'));
 //# sourceMappingURL=index.js.map
