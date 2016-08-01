@@ -48,11 +48,36 @@ var ProfileComponent = (function () {
             []
         ]);
         this.myAssets = [this.asset1, this.asset2, this.asset3];
+        this.newAssetsShow = false;
         dragulaService.setOptions('assets-bag', { revertOnSpill: true });
     }
     ProfileComponent.prototype.imageClick = function (selectedAsset, event) {
         event.stopPropagation();
         this.selectedAsset = selectedAsset;
+    };
+    ProfileComponent.prototype.newAssetsClicked = function () {
+        event.stopPropagation();
+        this.newAssetsShow = true;
+    };
+    ProfileComponent.prototype.closeNewAssetsClicked = function () {
+        event.stopPropagation();
+        this.newAssetsShow = false;
+    };
+    /* Recieves emitted timepicker */
+    ProfileComponent.prototype.addTimeRangeToAsset = function (emittedArray) {
+        var selectedWeekdays = emittedArray[0];
+        var timeRange = emittedArray[1];
+        for (var n = 0; n < selectedWeekdays.length; n++) {
+            if (selectedWeekdays[n])
+                this.selectedAsset.availability[n].push(timeRange);
+        }
+    };
+    /* Recies emitted new-assets-picker */
+    ProfileComponent.prototype.addNewlyCreatedAssets = function (newAssets) {
+        for (var _i = 0, newAssets_1 = newAssets; _i < newAssets_1.length; _i++) {
+            var newAsset = newAssets_1[_i];
+            this.myAssets.push(newAsset);
+        }
     };
     __decorate([
         core_1.Input(), 
@@ -62,8 +87,11 @@ var ProfileComponent = (function () {
         core_1.Component({
             selector: 'profile',
             templateUrl: "app/dashboard/profile.component.html",
-            styleUrls: ["app/dashboard/styles.css"],
-            directives: [ng2_dragula_1.Dragula, index_1.WeektimeshowerComponent, index_1.WeektimepickerComponent,
+            styleUrls: ["app/dashboard/styles.css", "app/shared/dragula.css"],
+            directives: [ng2_dragula_1.Dragula,
+                index_1.WeekTimeShowerComponent,
+                index_1.WeekTimePickerComponent,
+                index_1.NewAssetsPickerComponent,
                 ng2_bootstrap_1.MODAL_DIRECTIVES],
             viewProviders: [ng2_dragula_1.DragulaService, ng2_bootstrap_1.BS_VIEW_PROVIDERS]
         }), 

@@ -1,16 +1,27 @@
-<div class="wrapper">
 <h2> Available Assets </h2>
-  <div class="container" [dragula]='"assets-bag"'> 
-    <div class="asset-image" *ngFor="let myAsset of availableAssets">
+<div class="wrapper">
+  <div class="container">
+    <div class="asset-image"  
+*ngFor="let myAsset of availableAssets"
+      (click)="imageClick(myAsset)"
+      [class.selected]="isAssetSelected(myAsset)"
+    >
       <img src="https://blognumbers.files.wordpress.com/2010/09/{{myAsset.name}}.jpg" alt="{{myAsset.name}}" >
     </div>
   </div>
+</div>
 
 <h2> New Assets </h2> 
-  <div class="container" [dragula]='"assets-bag"'>
-    <div class="asset-image" *ngFor="let myAsset of newAssets">
-      <img src="https://blognumbers.files.wordpress.com/2010/09/{{myAsset.name}}.jpg" alt="{{myAsset.name}}">
+<div class="wrapper">
+  <div class="container">
+    <div class="asset-image" *ngFor="let assetIndex of selectedIndexes">
+      <img src="https://blognumbers.files.wordpress.com/2010/09/{{availableAssets[assetIndex].name}}.jpg" alt="{{availableAssets[assetIndex].name}}">
     </div>
   </div>
 </div>
+
+<week-time-picker (submit)="applyTimeRange($event)"></week-time-picker>
+<button class="btn btn-primary" (click)="createAssets()"> Create Assets </button>
+
+
 

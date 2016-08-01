@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core'
 import { Dragula, DragulaService} from 'ng2-dragula/ng2-dragula';
-import { WeektimeshowerComponent, WeektimepickerComponent } from '../pickers/index';
+import { WeekTimeShowerComponent, 
+         WeekTimePickerComponent, 
+         NewAssetsPickerComponent } from '../pickers/index';
 import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { Asset } from '../shared/index'; 
@@ -9,8 +11,11 @@ import { Asset } from '../shared/index';
 @Component({
   selector: 'profile',
   templateUrl: "app/dashboard/profile.component.html",
-  styleUrls: ["app/dashboard/styles.css"],
-  directives: [Dragula, WeektimeshowerComponent, WeektimepickerComponent,
+  styleUrls: ["app/dashboard/styles.css", "app/shared/dragula.css"],
+  directives: [Dragula, 
+              WeekTimeShowerComponent, 
+              WeekTimePickerComponent,
+              NewAssetsPickerComponent,
               MODAL_DIRECTIVES],
   viewProviders: [DragulaService, BS_VIEW_PROVIDERS]
 })
@@ -65,6 +70,7 @@ export class ProfileComponent {
 
   myAssets: Asset[] = [this.asset1, this.asset2, this.asset3];
   selectedAsset: Asset;
+  newAssetsShow: boolean = false;
 
 
   constructor(private dragulaService: DragulaService){
@@ -75,6 +81,33 @@ export class ProfileComponent {
     event.stopPropagation();
     this.selectedAsset = selectedAsset;
   } 
+
+  newAssetsClicked(){
+    event.stopPropagation();
+    this.newAssetsShow = true;
+  } 
+
+  closeNewAssetsClicked(){
+    event.stopPropagation();
+    this.newAssetsShow = false;
+  }
+
+  /* Recieves emitted timepicker */
+  addTimeRangeToAsset(emittedArray: any){
+    var selectedWeekdays = emittedArray[0];
+    var timeRange = emittedArray[1];
+    for(var n = 0; n < selectedWeekdays.length; n++){
+      if (selectedWeekdays[n]) 
+        this.selectedAsset.availability[n].push(timeRange);
+    }
+  }
+
+  /* Recies emitted new-assets-picker */
+  addNewlyCreatedAssets(newAssets: any){
+    for (let newAsset of newAssets){
+      this.myAssets.push(newAsset);
+    }
+  }
 
 }
 

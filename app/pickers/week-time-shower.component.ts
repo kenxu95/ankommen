@@ -12,7 +12,7 @@ import { Dragula, DragulaService } from 'ng2-dragula/ng2-dragula';
   providers: [DateService]
 })
 
-export class WeektimeshowerComponent {
+export class WeekTimeShowerComponent {
   private weekdays = ["Monday", "Tuesday", "Wednesday", 
             "Thursday", "Friday", "Saturday", "Sunday"];
 

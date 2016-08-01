@@ -18,4 +18,15 @@
     </li>
   </ul>
 
-  <button (click)=applyTimeRange() [disabled]="canApplyTimeRange()"> Apply Time Range</button>
+  <ul class="weekday-selection">
+    <li *ngFor="let usedTimeRange of usedTimeRanges" (click)=onSelectUsedTimeRange(usedTimeRange) 
+    [class.selected]="selectedTimeRange === usedTimeRange">
+      <div *ngIf="usedTimeRange">
+      {{dateService.getTime(startTime)}} to {{dateService.getTime(endTime)}}
+      </div>
+    </li>
+</ul>
+</div>
+
+
+<button (click)=applyTimeRange() [disabled]="canApplyTimeRange()"> Apply Time Range</button>

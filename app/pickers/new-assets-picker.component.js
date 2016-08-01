@@ -9,28 +9,72 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var ng2_dragula_1 = require('ng2-dragula/ng2-dragula');
-var index_1 = require('../shared/index');
+var index_1 = require('./index');
+var index_2 = require('../shared/index');
 var NewAssetsPickerComponent = (function () {
-    function NewAssetsPickerComponent(dragulaService) {
-        this.dragulaService = dragulaService;
-        // Pull From Backend
-        this.availableAssets = [new index_1.Asset(5, []), new index_1.Asset(6, []), new index_1.Asset(7, []), new index_1.Asset(9, [])];
-        this.newAssets = [];
-        dragulaService.setOptions('assets-bag', { revertOnSpill: true });
+    function NewAssetsPickerComponent() {
+        this.submit = new core_1.EventEmitter();
+        // TODO: Pull From Backend? Maybe only the asset names...
+        // TODO: Do we need a temporary holding place for deselected assets?
+        this.availableAssets = [new index_2.Asset(5, [[], [], [], [], [], [], []]),
+            new index_2.Asset(6, [[], [], [], [], [], [], []]),
+            new index_2.Asset(7, [[], [], [], [], [], [], []]),
+            new index_2.Asset(9, [[], [], [], [], [], [], []])];
+        this.selectedIndexes = []; // Assets currently displayed
     }
+    NewAssetsPickerComponent.prototype.imageClick = function (clickedAsset) {
+        var assetIndex = this.availableAssets.indexOf(clickedAsset);
+        var selectedIndex = this.selectedIndexes.indexOf(assetIndex);
+        // If asset was deselected, move it out of selected assets 
+        if (selectedIndex > -1) {
+            this.selectedIndexes.splice(selectedIndex, 1);
+        }
+        else {
+            // Otherwise, the asset was selected so move it into selectedAssets
+            this.selectedIndexes.push(assetIndex);
+        }
+    };
+    NewAssetsPickerComponent.prototype.isAssetSelected = function (myAsset) {
+        var assetIndex = this.availableAssets.indexOf(myAsset);
+        var selectedIndex = this.selectedIndexes.indexOf(assetIndex);
+        return selectedIndex > -1;
+    };
+    /* Applies the emitted time range to the selected assets*/
+    NewAssetsPickerComponent.prototype.applyTimeRange = function (emittedArray) {
+        var selectedWeekdays = emittedArray[0];
+        var timeRange = emittedArray[1];
+        for (var _i = 0, _a = this.selectedIndexes; _i < _a.length; _i++) {
+            var assetIndex = _a[_i];
+            for (var n = 0; n < selectedWeekdays.length; n++) {
+                if (selectedWeekdays[n]) {
+                    this.availableAssets[assetIndex].availability[n].push(timeRange);
+                }
+            }
+        }
+    };
+    /* Emits the chosen assets and remove them from available assets */
+    NewAssetsPickerComponent.prototype.createAssets = function () {
+        var createdAssets = [];
+        for (var _i = 0, _a = this.selectedIndexes.sort().reverse(); _i < _a.length; _i++) {
+            var assetIndex = _a[_i];
+            createdAssets.push(this.availableAssets[assetIndex]);
+            this.availableAssets.splice(assetIndex, 1); /* Remove the assets from available assets */
+        }
+        this.submit.emit(createdAssets);
+        this.selectedIndexes = []; /* Clear available array */
+    };
     __decorate([
-        core_1.Input(), 
+        core_1.Output(), 
         __metadata('design:type', Object)
-    ], NewAssetsPickerComponent.prototype, "mockUser", void 0);
+    ], NewAssetsPickerComponent.prototype, "submit", void 0);
     NewAssetsPickerComponent = __decorate([
         core_1.Component({
             selector: 'new-assets-picker',
-            templateUrl: 'app/dashboard/newAssetsPicker.component.html',
-            directives: [ng2_dragula_1.Dragula],
-            viewProviders: [ng2_dragula_1.DragulaService]
+            templateUrl: 'app/pickers/new-assets-picker.component.html',
+            styleUrls: ['app/pickers/styles.css'],
+            directives: [index_1.WeekTimePickerComponent]
         }), 
-        __metadata('design:paramtypes', [ng2_dragula_1.DragulaService])
+        __metadata('design:paramtypes', [])
     ], NewAssetsPickerComponent);
     return NewAssetsPickerComponent;
 }());

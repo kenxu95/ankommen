@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var index_1 = require('../shared/index');
 var ng2_dragula_1 = require('ng2-dragula/ng2-dragula');
-var WeektimeshowerComponent = (function () {
-    function WeektimeshowerComponent(dateService, dragulaService) {
+var WeekTimeShowerComponent = (function () {
+    function WeekTimeShowerComponent(dateService, dragulaService) {
         this.dateService = dateService;
         this.dragulaService = dragulaService;
         this.weekdays = ["Monday", "Tuesday", "Wednesday",
@@ -22,8 +22,8 @@ var WeektimeshowerComponent = (function () {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', index_1.Asset)
-    ], WeektimeshowerComponent.prototype, "asset", void 0);
-    WeektimeshowerComponent = __decorate([
+    ], WeekTimeShowerComponent.prototype, "asset", void 0);
+    WeekTimeShowerComponent = __decorate([
         core_1.Component({
             selector: 'week-time-shower',
             templateUrl: 'app/pickers/week-time-shower.component.html',
@@ -33,8 +33,8 @@ var WeektimeshowerComponent = (function () {
             providers: [index_1.DateService]
         }), 
         __metadata('design:paramtypes', [index_1.DateService, ng2_dragula_1.DragulaService])
-    ], WeektimeshowerComponent);
-    return WeektimeshowerComponent;
+    ], WeekTimeShowerComponent);
+    return WeekTimeShowerComponent;
 }());
-exports.WeektimeshowerComponent = WeektimeshowerComponent;
+exports.WeekTimeShowerComponent = WeekTimeShowerComponent;
 //# sourceMappingURL=week-time-shower.component.js.map

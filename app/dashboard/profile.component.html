@@ -19,7 +19,7 @@
     </div>
   </div>
 </div>
-<button class="btn btn-primary" (click)="lgNewAssetsModal.show()">Add New Assets</button>
+<button class="btn btn-primary" (click)="newAssetsClicked(); lgNewAssetsModal.show()">Add New Assets</button>
 
 
 <!-- Popup when an asset is clicked -->
@@ -35,8 +35,8 @@ role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     </div>
     <div class="modal-body">
       <div id="timeeditor">
-        <week-time-shower *ngIf="selectedAsset" [asset]="selectedAsset"></week-time-shower>
-        <week-time-picker *ngIf="selectedAsset" [asset]="selectedAsset"></week-time-picker>
+        <week-time-shower [asset]="selectedAsset"></week-time-shower>
+        <week-time-picker (submit)="addTimeRangeToAsset($event)" ></week-time-picker>
       </div>
     </div>
   </div>
@@ -45,19 +45,29 @@ role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 
 <div bsModal #lgNewAssetsModal="bs-modal" class="modal fade" tabindex="-1" 
 role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg">
+<div *ngIf="newAssetsShow" class="modal-dialog modal-lg">
   <div class="modal-content">
     <div class="modal-header">
-      <button type="button" class="close" (click)="lgNewAssetsModal.hide()" aria-label="Close">
+      <button type="button" class="close" (click)="closeNewAssetsClicked(); lgNewAssetsModal.hide()" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      <h4 class="modal-title">Hello</h4>
+      <h4 class="modal-title">Pick new assets</h4>
     </div>
     <div class="modal-body">
       <div id="timeeditor">
-      My Name is BLARGP
+        <new-assets-picker (submit)="addNewlyCreatedAssets($event)"></new-assets-picker> 
       </div>
     </div>
   </div>
 </div>
 </div>
+
+
+
+
+
+
+
+
+
+

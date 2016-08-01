@@ -12,9 +12,10 @@ var core_1 = require('@angular/core');
 var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
 var index_1 = require('./index');
 var index_2 = require('../shared/index');
-var WeektimepickerComponent = (function () {
-    function WeektimepickerComponent(dateService) {
+var WeekTimePickerComponent = (function () {
+    function WeekTimePickerComponent(dateService) {
         this.dateService = dateService;
+        this.submit = new core_1.EventEmitter();
         this.weekdays = ["Monday", "Tuesday", "Wednesday",
             "Thursday", "Friday", "Saturday", "Sunday"];
         this.selectedWeekdays = Array(7); // Whether any day of the week was selected
@@ -22,39 +23,50 @@ var WeektimepickerComponent = (function () {
         this.hstep = 1;
         this.mstep = 15;
         this.ismeridian = false;
+        // TODO: Backend also
+        this.usedTimeRanges = [
+            [],
+            [{ start: new Date(), end: new Date() }],
+            [],
+            [{ start: new Date(), end: new Date() }],
+            [],
+            [],
+            []];
     }
-    WeektimepickerComponent.prototype.ngOnInit = function () {
+    WeekTimePickerComponent.prototype.ngOnInit = function () {
         this.startTime = new Date();
         this.endTime = new Date();
     };
-    WeektimepickerComponent.prototype.onSelect = function (weekIndex) {
+    WeekTimePickerComponent.prototype.onSelect = function (weekIndex) {
         this.selectedWeekdays[weekIndex] = !this.selectedWeekdays[weekIndex];
     };
-    WeektimepickerComponent.prototype.canApplyTimeRange = function () {
+    WeekTimePickerComponent.prototype.onSelectUsedTimeRange = function (usedTimeRange) {
+        this.selectedTimeRange = usedTimeRange;
+        this.startTime = usedTimeRange.start;
+        this.endTime = usedTimeRange.end;
+    };
+    WeekTimePickerComponent.prototype.canApplyTimeRange = function () {
         return !this.selectedWeekdays.some(function (_) { return _; });
     };
-    WeektimepickerComponent.prototype.applyTimeRange = function () {
-        for (var n = 0; n < this.selectedWeekdays.length; n++) {
-            if (this.selectedWeekdays[n]) {
-                this.asset.availability[n].push({ start: this.startTime, end: this.endTime });
-            }
-        }
+    WeekTimePickerComponent.prototype.applyTimeRange = function () {
+        this.submit.emit([this.selectedWeekdays,
+            { start: this.startTime, end: this.endTime }]);
     };
     __decorate([
-        core_1.Input(), 
-        __metadata('design:type', index_2.Asset)
-    ], WeektimepickerComponent.prototype, "asset", void 0);
-    WeektimepickerComponent = __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], WeekTimePickerComponent.prototype, "submit", void 0);
+    WeekTimePickerComponent = __decorate([
         core_1.Component({
             selector: 'week-time-picker',
             templateUrl: 'app/pickers/week-time-picker.component.html',
             styleUrls: ['app/pickers/week-time-picker.css'],
-            directives: [ng2_bootstrap_1.TimepickerComponent, core_1.forwardRef(function () { return index_1.WeektimeshowerComponent; })],
+            directives: [ng2_bootstrap_1.TimepickerComponent, core_1.forwardRef(function () { return index_1.WeekTimeShowerComponent; })],
             providers: [index_2.DateService]
         }), 
         __metadata('design:paramtypes', [index_2.DateService])
-    ], WeektimepickerComponent);
-    return WeektimepickerComponent;
+    ], WeekTimePickerComponent);
+    return WeekTimePickerComponent;
 }());
-exports.WeektimepickerComponent = WeektimepickerComponent;
+exports.WeekTimePickerComponent = WeekTimePickerComponent;
 //# sourceMappingURL=week-time-picker.component.js.map

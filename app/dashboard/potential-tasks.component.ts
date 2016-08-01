@@ -32,8 +32,6 @@ export class PotentialTasksComponent implements OnChanges {
   }
 
   searchForTasks(assets: string[] = this.mockUser.assets) {
-    console.log(assets);
-
     var accountedTasks = this.mockUser.myTasks
                     .concat(this.mockUser.participatingTasks
                     .concat(this.mockUser.specificallyRequest)); 

@@ -1,20 +1,20 @@
-import { Component, Input, forwardRef, OnInit } from '@angular/core';
+import { Component, forwardRef, OnInit, Output, EventEmitter } from '@angular/core';
 import { TimepickerComponent } from 'ng2-bootstrap/ng2-bootstrap';
 
-import { WeektimeshowerComponent } from './index';
+import { WeekTimeShowerComponent } from './index';
 import { Asset, DateService } from '../shared/index';
 
 @Component ({
   selector: 'week-time-picker',
   templateUrl: 'app/pickers/week-time-picker.component.html',
   styleUrls: ['app/pickers/week-time-picker.css'],
-  directives: [TimepickerComponent, forwardRef(() => WeektimeshowerComponent)], // TODO: Circular dependency resolve
+  directives: [TimepickerComponent, forwardRef(() => WeekTimeShowerComponent)], // TODO: Circular dependency resolve
   providers: [DateService]
 })
 
-export class WeektimepickerComponent implements OnInit {
-  @Input()
-  asset: Asset;
+export class WeekTimePickerComponent implements OnInit {
+  @Output()
+  submit = new EventEmitter();
 
   private weekdays = ["Monday", "Tuesday", "Wednesday", 
             "Thursday", "Friday", "Saturday", "Sunday"];
@@ -29,6 +29,17 @@ export class WeektimepickerComponent implements OnInit {
   startTime: Date;
   endTime: Date;
 
+  // TODO: Backend also
+  usedTimeRanges: any[][] = [
+  [],
+  [{start: new Date(), end: new Date()}],
+  [],
+  [{start: new Date(), end: new Date()}],
+  [],
+  [],
+  []];
+  selectedTimeRange: any;
+
   constructor(private dateService: DateService){}
 
   ngOnInit(){
@@ -40,15 +51,18 @@ export class WeektimepickerComponent implements OnInit {
     this.selectedWeekdays[weekIndex] = !this.selectedWeekdays[weekIndex]
   }
 
+  onSelectUsedTimeRange(usedTimeRange: any){
+    this.selectedTimeRange = usedTimeRange;
+    this.startTime = usedTimeRange.start;
+    this.endTime = usedTimeRange.end;
+  }
+
   canApplyTimeRange(){
     return !this.selectedWeekdays.some(_ => _);
   }
 
   applyTimeRange(){
-    for(var n = 0; n < this.selectedWeekdays.length; n++){
-      if(this.selectedWeekdays[n]){
-        this.asset.availability[n].push({start: this.startTime, end: this.endTime});
-      }
-    }
+    this.submit.emit([this.selectedWeekdays, 
+                     {start: this.startTime, end: this.endTime}]);
   }
 }

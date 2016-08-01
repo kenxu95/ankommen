@@ -25,7 +25,6 @@ var PotentialTasksComponent = (function () {
     PotentialTasksComponent.prototype.searchForTasks = function (assets) {
         var _this = this;
         if (assets === void 0) { assets = this.mockUser.assets; }
-        console.log(assets);
         var accountedTasks = this.mockUser.myTasks
             .concat(this.mockUser.participatingTasks
             .concat(this.mockUser.specificallyRequest));
