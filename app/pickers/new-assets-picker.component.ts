@@ -42,7 +42,7 @@ export class NewAssetsPickerComponent {
   }
 
   /* Applies the emitted time range to the selected assets*/
-  applyTimeRange(emittedArray: any){
+  applyTimeRangeToAssets(emittedArray: any){
     var selectedWeekdays = emittedArray[0];
     var timeRange = emittedArray[1];
 

@@ -40,7 +40,7 @@ var NewAssetsPickerComponent = (function () {
         return selectedIndex > -1;
     };
     /* Applies the emitted time range to the selected assets*/
-    NewAssetsPickerComponent.prototype.applyTimeRange = function (emittedArray) {
+    NewAssetsPickerComponent.prototype.applyTimeRangeToAssets = function (emittedArray) {
         var selectedWeekdays = emittedArray[0];
         var timeRange = emittedArray[1];
         for (var _i = 0, _a = this.selectedIndexes; _i < _a.length; _i++) {

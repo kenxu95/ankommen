@@ -11,22 +11,56 @@
   </div>
 
   <div id="weekdaypicker">
-    <ul class="weekday-selection">
-      <li *ngFor="let weekIndex of [0, 1, 2, 3, 4, 5, 6]" (click)=onSelect(weekIndex) 
-      [class.selected]="selectedWeekdays[weekIndex]">
-      {{weekdays[weekIndex]}}
-    </li>
-  </ul>
-
-  <ul class="weekday-selection">
-    <li *ngFor="let usedTimeRange of usedTimeRanges" (click)=onSelectUsedTimeRange(usedTimeRange) 
-    [class.selected]="selectedTimeRange === usedTimeRange">
-      <div *ngIf="usedTimeRange">
-      {{dateService.getTime(startTime)}} to {{dateService.getTime(endTime)}}
-      </div>
-    </li>
+   <ul class="weekday-selection">
+    <li *ngFor="let weekIndex of [0, 1, 2, 3, 4, 5, 6]" (click)=onSelect(weekIndex) 
+    [class.selected]="selectedWeekdays[weekIndex]">
+    {{weekdays[weekIndex]}}
+  </li>
 </ul>
 </div>
 
-
 <button (click)=applyTimeRange() [disabled]="canApplyTimeRange()"> Apply Time Range</button>
+
+
+
+<h3> Add a Used Time Range</h3>
+<ul class="weekday-selection">
+
+  <li class="btn-group" dropdown *ngFor="let weekIndex of [0, 1, 2, 3, 4, 5, 6]" 
+  [class.selected]="selectedWeekdays[weekIndex]">
+
+  <button id="single-button" type="button" class="btn btn-primary" dropdownToggle>
+    {{weekdays[weekIndex]}} <span class="caret"></span>
+  </button>
+
+  <ul dropdownMenu role="menu" aria-labelledby="single-button" 
+  *ngIf="usedTimeRanges[weekIndex].length > 0">        
+  <li role="menuitem" 
+    *ngFor="let usedTimeRange of usedTimeRanges[weekIndex]"
+    (click)="applyUsedTimeRange(weekIndex, usedTimeRange)"> 
+    {{dateService.getTime(usedTimeRange.start)}} to {{dateService.getTime(usedTimeRange.end)}}
+  </li> 
+</ul>
+
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

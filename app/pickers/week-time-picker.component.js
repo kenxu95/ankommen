@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
 var index_1 = require('./index');
 var index_2 = require('../shared/index');
+var ng2_bootstrap_2 = require('ng2-bootstrap/ng2-bootstrap');
 var WeekTimePickerComponent = (function () {
     function WeekTimePickerComponent(dateService) {
         this.dateService = dateService;
@@ -26,12 +27,13 @@ var WeekTimePickerComponent = (function () {
         // TODO: Backend also
         this.usedTimeRanges = [
             [],
-            [{ start: new Date(), end: new Date() }],
+            [{ start: new Date(), end: new Date() }, { start: new Date(), end: new Date() }, { start: new Date(), end: new Date() }],
             [],
             [{ start: new Date(), end: new Date() }],
             [],
             [],
             []];
+        this.selectedUsedWeekdays = Array(7);
     }
     WeekTimePickerComponent.prototype.ngOnInit = function () {
         this.startTime = new Date();
@@ -40,17 +42,18 @@ var WeekTimePickerComponent = (function () {
     WeekTimePickerComponent.prototype.onSelect = function (weekIndex) {
         this.selectedWeekdays[weekIndex] = !this.selectedWeekdays[weekIndex];
     };
-    WeekTimePickerComponent.prototype.onSelectUsedTimeRange = function (usedTimeRange) {
-        this.selectedTimeRange = usedTimeRange;
-        this.startTime = usedTimeRange.start;
-        this.endTime = usedTimeRange.end;
-    };
     WeekTimePickerComponent.prototype.canApplyTimeRange = function () {
         return !this.selectedWeekdays.some(function (_) { return _; });
     };
     WeekTimePickerComponent.prototype.applyTimeRange = function () {
         this.submit.emit([this.selectedWeekdays,
             { start: this.startTime, end: this.endTime }]);
+    };
+    WeekTimePickerComponent.prototype.applyUsedTimeRange = function (weekIndex, usedTimeRange) {
+        this.selectedUsedWeekdays[weekIndex] = true;
+        this.submit.emit([this.selectedUsedWeekdays,
+            usedTimeRange]);
+        this.selectedUsedWeekdays[weekIndex] = false;
     };
     __decorate([
         core_1.Output(), 
@@ -61,7 +64,9 @@ var WeekTimePickerComponent = (function () {
             selector: 'week-time-picker',
             templateUrl: 'app/pickers/week-time-picker.component.html',
             styleUrls: ['app/pickers/week-time-picker.css'],
-            directives: [ng2_bootstrap_1.TimepickerComponent, core_1.forwardRef(function () { return index_1.WeekTimeShowerComponent; })],
+            directives: [ng2_bootstrap_1.TimepickerComponent,
+                ng2_bootstrap_2.DROPDOWN_DIRECTIVES,
+                core_1.forwardRef(function () { return index_1.WeekTimeShowerComponent; })],
             providers: [index_2.DateService]
         }), 
         __metadata('design:paramtypes', [index_2.DateService])

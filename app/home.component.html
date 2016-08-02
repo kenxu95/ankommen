@@ -4,11 +4,19 @@
 </div>
 
 
+<sebm-google-map [latitude]="lat" [longitude]="lng">
+  <sebm-google-map-marker [latitude]="lat" [longitude]="lng">
+  <sebm-google-map-info-window [disableAutoPan]="true">
+  Hello, this the the info window
+  </sebm-google-map-info-window>
+  </sebm-google-map-marker>
+</sebm-google-map>
+
+
+
+
+
+
 <timepicker [(ngModel)]="selectedTime" [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian"></timepicker>
 
 <pre class="alert alert-info">Time is: {{selectedTime}}</pre>
-
-
-<sebm-google-map [latitude]="lat" [longitude]="lng">
-  <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
-</sebm-google-map>

@@ -3,12 +3,15 @@ import { TimepickerComponent } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { WeekTimeShowerComponent } from './index';
 import { Asset, DateService } from '../shared/index';
+import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component ({
   selector: 'week-time-picker',
   templateUrl: 'app/pickers/week-time-picker.component.html',
   styleUrls: ['app/pickers/week-time-picker.css'],
-  directives: [TimepickerComponent, forwardRef(() => WeekTimeShowerComponent)], // TODO: Circular dependency resolve
+  directives: [TimepickerComponent, 
+              DROPDOWN_DIRECTIVES,
+              forwardRef(() => WeekTimeShowerComponent)], // TODO: Circular dependency resolve
   providers: [DateService]
 })
 
@@ -32,13 +35,13 @@ export class WeekTimePickerComponent implements OnInit {
   // TODO: Backend also
   usedTimeRanges: any[][] = [
   [],
-  [{start: new Date(), end: new Date()}],
+  [{start: new Date(), end: new Date()}, {start: new Date(), end: new Date()}, {start: new Date(), end: new Date()}],
   [],
   [{start: new Date(), end: new Date()}],
   [],
   [],
   []];
-  selectedTimeRange: any;
+  selectedUsedWeekdays = Array<boolean>(7); 
 
   constructor(private dateService: DateService){}
 
@@ -51,12 +54,6 @@ export class WeekTimePickerComponent implements OnInit {
     this.selectedWeekdays[weekIndex] = !this.selectedWeekdays[weekIndex]
   }
 
-  onSelectUsedTimeRange(usedTimeRange: any){
-    this.selectedTimeRange = usedTimeRange;
-    this.startTime = usedTimeRange.start;
-    this.endTime = usedTimeRange.end;
-  }
-
   canApplyTimeRange(){
     return !this.selectedWeekdays.some(_ => _);
   }
@@ -65,4 +62,22 @@ export class WeekTimePickerComponent implements OnInit {
     this.submit.emit([this.selectedWeekdays, 
                      {start: this.startTime, end: this.endTime}]);
   }
+
+  applyUsedTimeRange(weekIndex: number, usedTimeRange: any) {
+    this.selectedUsedWeekdays[weekIndex] = true;
+    this.submit.emit([this.selectedUsedWeekdays,
+                      usedTimeRange]);
+    this.selectedUsedWeekdays[weekIndex] = false;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
