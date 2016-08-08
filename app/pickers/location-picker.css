@@ -1,0 +1,11 @@
+  .sebm-google-map-container {
+    height: 300px;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  .found-addresses {
+    cursor: pointer;
+  }

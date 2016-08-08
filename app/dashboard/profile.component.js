@@ -47,9 +47,14 @@ var ProfileComponent = (function () {
             [],
             []
         ]);
+        /* ASSETS VARIABLES */
         this.myAssets = [this.asset1, this.asset2, this.asset3];
         this.newAssetsShow = false;
+        /* LOCATIONS VARIABLES */
+        this.myLocations = [];
+        this.newLocationsShow = false;
         dragulaService.setOptions('assets-bag', { revertOnSpill: true });
+        dragulaService.setOptions('locations-bag', { removeOnSpill: true });
     }
     ProfileComponent.prototype.imageClick = function (selectedAsset, event) {
         event.stopPropagation();
@@ -73,11 +78,23 @@ var ProfileComponent = (function () {
         }
     };
     /* Recies emitted new-assets-picker */
-    ProfileComponent.prototype.addNewlyCreatedAssets = function (newAssets) {
+    ProfileComponent.prototype.addAssets = function (newAssets) {
         for (var _i = 0, newAssets_1 = newAssets; _i < newAssets_1.length; _i++) {
             var newAsset = newAssets_1[_i];
             this.myAssets.push(newAsset);
         }
+    };
+    /* LOCATION PICKER */
+    ProfileComponent.prototype.newLocationsClicked = function () {
+        event.stopPropagation();
+        this.newLocationsShow = true;
+    };
+    ProfileComponent.prototype.closeNewLocationsClicked = function () {
+        event.stopPropagation();
+        this.newLocationsShow = false;
+    };
+    ProfileComponent.prototype.addLocation = function (newLocation) {
+        this.myLocations.push(newLocation);
     };
     __decorate([
         core_1.Input(), 
@@ -92,6 +109,7 @@ var ProfileComponent = (function () {
                 index_1.WeekTimeShowerComponent,
                 index_1.WeekTimePickerComponent,
                 index_1.NewAssetsPickerComponent,
+                index_1.LocationPickerComponent,
                 ng2_bootstrap_1.MODAL_DIRECTIVES],
             viewProviders: [ng2_dragula_1.DragulaService, ng2_bootstrap_1.BS_VIEW_PROVIDERS]
         }), 

@@ -2,10 +2,11 @@ import { Component, Input } from '@angular/core'
 import { Dragula, DragulaService} from 'ng2-dragula/ng2-dragula';
 import { WeekTimeShowerComponent, 
          WeekTimePickerComponent, 
-         NewAssetsPickerComponent } from '../pickers/index';
+         NewAssetsPickerComponent,
+         LocationPickerComponent } from '../pickers/index';
 import { MODAL_DIRECTIVES, BS_VIEW_PROVIDERS } from 'ng2-bootstrap/ng2-bootstrap';
 
-import { Asset } from '../shared/index'; 
+import { Asset, Location } from '../shared/index'; 
 
  
 @Component({
@@ -16,6 +17,7 @@ import { Asset } from '../shared/index';
               WeekTimeShowerComponent, 
               WeekTimePickerComponent,
               NewAssetsPickerComponent,
+              LocationPickerComponent,
               MODAL_DIRECTIVES],
   viewProviders: [DragulaService, BS_VIEW_PROVIDERS]
 })
@@ -68,13 +70,18 @@ export class ProfileComponent {
       []
       ]);
 
+  /* ASSETS VARIABLES */
   myAssets: Asset[] = [this.asset1, this.asset2, this.asset3];
   selectedAsset: Asset;
   newAssetsShow: boolean = false;
 
+  /* LOCATIONS VARIABLES */
+  myLocations: Location[] = [];
+  newLocationsShow: boolean = false;
 
   constructor(private dragulaService: DragulaService){
    dragulaService.setOptions('assets-bag', {revertOnSpill: true});
+   dragulaService.setOptions('locations-bag', {removeOnSpill: true});
   } 
    
   imageClick(selectedAsset: Asset, event: any){
@@ -103,11 +110,27 @@ export class ProfileComponent {
   }
 
   /* Recies emitted new-assets-picker */
-  addNewlyCreatedAssets(newAssets: any){
+  addAssets(newAssets: any){
     for (let newAsset of newAssets){
       this.myAssets.push(newAsset);
     }
   }
+
+  /* LOCATION PICKER */
+  newLocationsClicked() {
+    event.stopPropagation();
+    this.newLocationsShow = true;
+  }
+
+  closeNewLocationsClicked() {
+    event.stopPropagation();
+    this.newLocationsShow = false;
+  }
+
+  addLocation(newLocation: Location){
+    this.myLocations.push(newLocation);
+  }
+
 
 }
 

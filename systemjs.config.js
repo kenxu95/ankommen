@@ -12,7 +12,9 @@
     'dragula':                    'node_modules/dragula/dist/dragula.js',
     'ng2-dragula':                'node_modules/ng2-dragula',
     'moment':                     'node_modules/moment/moment.js',
-    'angular2-google-maps/core':  'node_modules/angular2-google-maps/core'
+    'angular2-google-maps/core':  'node_modules/angular2-google-maps/core',
+    'js-data':                    'node_modules/js-data/dist/js-data.js',
+    'js-data-http':               'node_modules/js-data-http/dist/js-data-http.js'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
@@ -20,7 +22,7 @@
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
     'ng2-dragula':                { defaultExtension: 'js' },
-    'angular2-google-maps/core':  { main: 'core.umd.js', defaultExtension: 'js'}
+    'angular2-google-maps/core':  { main: 'core.umd.js', defaultExtension: 'js'},
   };
   var ngPackageNames = [
     'common',

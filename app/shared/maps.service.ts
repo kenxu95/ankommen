@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { URLSearchParams, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class MapService {
+export class MapsService {
 
-  private geocodingUrl = "maps.googleapis.com/maps/api/geocode";
-
+  // TODO: Store this secretely to prevent quota theft 
+  private apiKey = "AIzaSyB1pb7Ppr6s5xroLDrvrj24jK1pHiib4Pk";
+  private geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json";
   constructor(private http: Http){}
 
   /* Obtain latitude and longitude from human-readable address */
   geocode(address: string){
+    let searchParams: URLSearchParams = new URLSearchParams();
+    searchParams.set("address", address);
+    searchParams.set("key", this.apiKey);
 
-    this.http.get(this.geocodingUrl, {
-
+    return this.http.get(this.geocodingUrl, {
+      search: searchParams,
     })
-        .map((res: Response) => res.json())
-        .subscribe(res => console.log(res.data),
-                   error => console.log("Error: " + error),
-                   () => console.log("Finished"));
+    .map((res: Response) => res.json());
  }
 
 

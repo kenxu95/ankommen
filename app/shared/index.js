@@ -9,4 +9,7 @@ __export(require('./task.service'));
 __export(require('./mockTasksDatabase'));
 __export(require('./asset'));
 __export(require('./date.service'));
+__export(require('./store'));
+__export(require('./maps.service'));
+__export(require('./location'));
 //# sourceMappingURL=index.js.map

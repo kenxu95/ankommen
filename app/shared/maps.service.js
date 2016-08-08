@@ -11,22 +11,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
-var MapService = (function () {
-    function MapService(http) {
+var MapsService = (function () {
+    function MapsService(http) {
         this.http = http;
-        this.geocodingUrl = "maps.googleapis.com/maps/api/geocode";
+        // TODO: Store this secretely to prevent quota theft 
+        this.apiKey = "AIzaSyB1pb7Ppr6s5xroLDrvrj24jK1pHiib4Pk";
+        this.geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json";
     }
     /* Obtain latitude and longitude from human-readable address */
-    MapService.prototype.geocode = function (address) {
-        this.http.get(this.geocodingUrl, {})
-            .map(function (res) { return res.json(); })
-            .subscribe(function (res) { return console.log(res.data); }, function (error) { return console.log("Error: " + error); }, function () { return console.log("Finished"); });
+    MapsService.prototype.geocode = function (address) {
+        var searchParams = new http_1.URLSearchParams();
+        searchParams.set("address", address);
+        searchParams.set("key", this.apiKey);
+        return this.http.get(this.geocodingUrl, {
+            search: searchParams,
+        })
+            .map(function (res) { return res.json(); });
     };
-    MapService = __decorate([
+    MapsService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], MapService);
-    return MapService;
+    ], MapsService);
+    return MapsService;
 }());
-exports.MapService = MapService;
+exports.MapsService = MapsService;
 //# sourceMappingURL=maps.service.js.map

@@ -5,3 +5,6 @@ export * from './task.service';
 export * from './mockTasksDatabase';
 export * from './asset';
 export * from './date.service';
+export * from './store';
+export * from './maps.service';
+export * from './location';
